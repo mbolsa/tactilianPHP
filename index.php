@@ -33,7 +33,7 @@ function escribePagina($error)
         </div><!-- /card-container -->
     </div><!-- /container -->
 	
-	
+</body>
 	
 <?php
 }
@@ -41,7 +41,6 @@ function escribePagina($error)
 function ComprobarLogin($email, $password)
 {
 	global $conexion;
-	global $IdCentro;
 	$resultado = $conexion->query("SELECT password FROM users WHERE email = '$email'");
 	if ($resultado->num_rows == 0)
 	{
@@ -59,7 +58,6 @@ function ComprobarLogin($email, $password)
 function cargarDatosSesion($email)
 {
 	global $conexion;
-	global $IdCentro;
 	$resultado = $conexion->query("SELECT id, name, surname FROM users WHERE email = '$email'");
 	$fila = $resultado->fetch_assoc();
 	session_start();
