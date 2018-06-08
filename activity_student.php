@@ -1,5 +1,14 @@
-  <br></br>
-  <br></br>
+<html>
+  <head>
+	<title>Catalog</title>
+	
+	
+<?php require_once("header.php"); ?>
+
+
+
+  <br>
+  <br>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-12 text-center">
@@ -18,11 +27,11 @@
           <img src="images/prueba.png" width="200" height="200">
           <img src="images/prueba.png" width="200" height="200">
         </div>
-        <br></br>
+        <br>
         <span class="group-btn btn-group-justified ">
           <a href="#" class="btn btn-light btn-block"> Imprimir </a>
         </span>
-        <br></br>
+        <br>
         <span class="group-btn btn-group-justified ">
           <a href="#" class="btn btn-light btn-block"> Añadir </a>
         </span>
@@ -42,11 +51,11 @@
           <span class="group-btn btn-group-justified ">
             <a href="#" class="btn btn-light btn-block"> Comenzar </a>
           </span>
-          <br></br>
+          <br>
           <span class="group-btn btn-group-justified ">
             <a href="#" class="btn btn-light btn-block"> Volver </a>
           </span>
-          <br></br>
+          <br>
           <span class="group-btn btn-group-justified ">
             <a href="#" class="btn btn-light btn-block"> Cancelar </a>
           </span>
@@ -54,9 +63,11 @@
       </div>
     </div>
   </div>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+<?php require_once("footer.php"); ?>

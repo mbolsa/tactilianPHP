@@ -1,5 +1,14 @@
-  <br></br>
-  <br></br>
+<html>
+  <head>
+  <title>Monitoring</title>
+  
+  
+<?php require_once("header.php"); ?>
+
+
+
+  <br>
+  <br>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-5">
@@ -25,8 +34,8 @@
             <option> Actividad 17 </option>
             <option> Actividad 18 </option>
           </select>
-          <br></br>
-          <div class="wrapper">
+          <br>
+          <div class="wrapper"></div>
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
               <a href="#" class="btn btn-outline-light btn-block"> Borrar </a>
@@ -35,10 +44,10 @@
         </div>
       </div>
       <div class="col-md-4 offset-md-2">
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
+        <br>
+        <br>
+        <br>
+        <br>
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
@@ -49,9 +58,11 @@
       </div>
     </div>
   </div>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+<?php require_once("footer.php"); ?>

@@ -1,5 +1,14 @@
-  <br></br>
-  <br></br>
+<html>
+  <head>
+	<title>Linked Teachers</title>
+	
+	
+<?php require_once("header.php"); ?>
+
+
+
+  <br>
+  <br>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-5">
@@ -25,7 +34,7 @@
             <option> Profesor 17 </option>
             <option> Profesor 18 </option>
           </select>
-          <br></br>
+          <br>
           <div class="wrapper"></div>
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
@@ -57,7 +66,7 @@
             <option> Profesor 17 </option>
             <option> Profesor 18 </option>
           </select>
-          <br></br>
+          <br>
           <div class="wrapper"></div>
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
@@ -68,9 +77,11 @@
       </div>
     </div>
   </div>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+<?php require_once("footer.php"); ?>

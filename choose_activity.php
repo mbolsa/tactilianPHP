@@ -1,5 +1,14 @@
-  <br></br>
-  <br></br>
+<html>
+  <head>
+	<title>Choose Activity</title>
+	
+	
+<?php require_once("header.php"); ?>
+
+
+
+  <br>
+  <br>
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-5">
@@ -26,14 +35,14 @@
             <option> Actividad generica 18 </option>
           </select>
         </div>
-        <br></br>
+        <br>
       </div>
           
       <div class="col-md-2"></div>
       <div class="col-md-4">
-        <br></br>
-        <br></br>
-        <br></br>
+        <br>
+        <br>
+        <br>
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
@@ -41,20 +50,20 @@
             </span>
           </div>
         </div>
-        <br></br>
+        <br>
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
               <a href="#" class="btn btn-light btn-block"> Borrar </a>
             </span>
           </div>
-          <br></br>
+          <br>
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
               <a href="#" class="btn btn-light btn-block"> Editar </a>
             </span>
           </div>
-          <br></br>
+          <br>
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
               <a href="#" class="btn btn-light btn-block"> Crear </a>
@@ -64,8 +73,8 @@
       </div>
     </div>
   </div>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
-  <br></br>
+  <br>
+  <br>
+ 
+
+<?php require_once("footer.php"); ?>
