@@ -7,8 +7,13 @@
 
 
 
+<<<<<<< HEAD
   <br>
   <br>
+=======
+ <br></br>
+  <br></br>
+>>>>>>> 1578ca053676b8d46719654e880a12099e1d8cf3
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-md-5">
@@ -62,8 +67,17 @@
       </div>
     </div>
   </div>
+<<<<<<< HEAD
   <br>
   <br>
+=======
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+  <br></br>
+>>>>>>> 1578ca053676b8d46719654e880a12099e1d8cf3
 
   
   <?php require_once("footer.php"); ?>
