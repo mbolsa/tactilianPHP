@@ -1,4 +1,13 @@
-  <br></br>
+<html>
+  <head>
+	<title>Choose Student</title>
+	
+	
+<?php require_once("header.php"); ?>
+
+
+
+ <br></br>
   <br></br>
   <div class="container">
     <div class="row justify-content-center">
@@ -59,3 +68,6 @@
   <br></br>
   <br></br>
   <br></br>
+
+  
+  <?php require_once("footer.php"); ?>
