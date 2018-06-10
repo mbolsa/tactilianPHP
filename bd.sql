@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 10-06-2018 a las 09:22:22
+-- Tiempo de generación: 10-06-2018 a las 10:25:37
 -- Versión del servidor: 5.7.22
 -- Versión de PHP: 5.4.16
 
@@ -87,16 +87,25 @@ CREATE TABLE IF NOT EXISTS `genericActivity` (
 --
 
 CREATE TABLE IF NOT EXISTS `person` (
-  `email` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `email` varchar(60) COLLATE utf8_spanish_ci NOT NULL,
   `name` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   `surname` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `passwd` varchar(32) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `passwd` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
   `rfid` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `alias` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `type` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
   PRIMARY KEY (`email`),
   UNIQUE KEY `rfid` (`rfid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `person`
+--
+
+INSERT INTO `person` (`email`, `name`, `surname`, `passwd`, `rfid`, `alias`, `type`) VALUES
+('', '', '', '', NULL, '', ''),
+('maiky14rmd@gmail.com', 'htyhyh', 'tyhty', '', NULL, 'tyht', 'alumno'),
+('miguellbolsa@gmail.com', 'nhjhjyj', 'ynjyj', '', NULL, '', 'alumno');
 
 -- --------------------------------------------------------
 

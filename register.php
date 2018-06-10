@@ -64,15 +64,33 @@ function comprobarUser($email)
 	}
 }
 
+function generateRandomString($length = 10) {
+
+return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
+
+}
+
 function insertarDatos($email, $name, $surname, $nick, $type)
 {
 	global $conexion;
-	$resultado = $conexion->query("INSERT INTO person(email, name, surname, alias, type) VALUES ('$email', '$name', '$surname', '$nick', '$type')");
+	$password1 = generateRandomString();
+	$password = md5($password1);
+	$resultado = $conexion->query("INSERT INTO person(email, name, surname, alias, type, passwd) VALUES ('$email', '$name', '$surname', '$nick', '$type', '$password')");
 	if (mysqli_query($conexion, $resultado)) {
 	    echo "New record created successfully";
 	} else {
 	    echo "Error: " . $resultado . "<br>" . mysqli_error($conexion);
 	}
+/*  $para      = $email;
+  $titulo    = 'Credenciales Tactilian';
+  $mensaje   = 'Hola,'. "\n"
+                'Ha sido registrado satisfactoriamente en nuestra aplicación. Sus credenciales son las siguientes:' . "\n\t" .
+                'email: ' . $email . "\n\t" .
+                'contraseña: ' . $password1 . "\n" . 
+                'Un saludo y gracias por registrarse.';
+  $cabeceras = 'From: admin@tactilian.com';
+
+  mail($para, $titulo, $mensaje, $cabeceras);*/
 	$resultado->close();
 }
 
