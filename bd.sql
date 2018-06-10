@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 09-06-2018 a las 15:34:11
+-- Tiempo de generación: 10-06-2018 a las 09:22:22
 -- Versión del servidor: 5.7.22
 -- Versión de PHP: 5.4.16
 
@@ -83,6 +83,24 @@ CREATE TABLE IF NOT EXISTS `genericActivity` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `person`
+--
+
+CREATE TABLE IF NOT EXISTS `person` (
+  `email` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `name` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `surname` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `passwd` varchar(32) COLLATE utf8_spanish_ci NOT NULL DEFAULT '',
+  `rfid` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `alias` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `type` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`email`),
+  UNIQUE KEY `rfid` (`rfid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `pictogram`
 --
 
@@ -93,23 +111,6 @@ CREATE TABLE IF NOT EXISTS `pictogram` (
   `sound` longblob,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `student`
---
-
-CREATE TABLE IF NOT EXISTS `student` (
-  `email` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `name` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `surname` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `alias` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `passwd` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `rfid` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  PRIMARY KEY (`email`),
-  UNIQUE KEY `rfid` (`rfid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -140,22 +141,6 @@ CREATE TABLE IF NOT EXISTS `teach` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `teacher`
---
-
-CREATE TABLE IF NOT EXISTS `teacher` (
-  `email` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `name` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `surname` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `passwd` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
-  `rfid` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
-  PRIMARY KEY (`email`),
-  UNIQUE KEY `rfid` (`rfid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `use`
 --
 
@@ -168,6 +153,28 @@ CREATE TABLE IF NOT EXISTS `use` (
   KEY `pictogram` (`pictogram`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `name` varchar(30) COLLATE utf8_spanish_ci NOT NULL,
+  `surname` varchar(40) COLLATE utf8_spanish_ci NOT NULL,
+  `password` varchar(32) COLLATE utf8_spanish_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id`, `email`, `name`, `surname`, `password`) VALUES
+(1, 'jorge@aguaron.com', 'Jorge', 'Aguarón', 'd67326a22642a324aa1b0745f2f17abb');
+
 --
 -- Restricciones para tablas volcadas
 --
@@ -177,13 +184,13 @@ CREATE TABLE IF NOT EXISTS `use` (
 --
 ALTER TABLE `activity`
   ADD CONSTRAINT `activity_ibfk_1` FOREIGN KEY (`genericActivity`) REFERENCES `genericActivity` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`student`) REFERENCES `student` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `activity_ibfk_2` FOREIGN KEY (`student`) REFERENCES `person` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `assign`
 --
 ALTER TABLE `assign`
-  ADD CONSTRAINT `assign_ibfk_1` FOREIGN KEY (`student`) REFERENCES `student` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `assign_ibfk_1` FOREIGN KEY (`student`) REFERENCES `person` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `assign_ibfk_2` FOREIGN KEY (`rfid`) REFERENCES `card` (`rfid`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `assign_ibfk_3` FOREIGN KEY (`pictogram`) REFERENCES `pictogram` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
@@ -194,30 +201,25 @@ ALTER TABLE `card`
   ADD CONSTRAINT `card_ibfk_1` FOREIGN KEY (`pictogram`) REFERENCES `pictogram` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `student`
+-- Filtros para la tabla `person`
 --
-ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`rfid`) REFERENCES `card` (`rfid`) ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE `person`
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`rfid`) REFERENCES `card` (`rfid`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`rfid`) REFERENCES `card` (`rfid`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `supervise`
 --
 ALTER TABLE `supervise`
   ADD CONSTRAINT `supervise_ibfk_1` FOREIGN KEY (`activity`) REFERENCES `activity` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `supervise_ibfk_2` FOREIGN KEY (`teacher`) REFERENCES `teacher` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `supervise_ibfk_2` FOREIGN KEY (`teacher`) REFERENCES `person` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `teach`
 --
 ALTER TABLE `teach`
-  ADD CONSTRAINT `teach_ibfk_1` FOREIGN KEY (`teacher`) REFERENCES `teacher` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `teach_ibfk_2` FOREIGN KEY (`student`) REFERENCES `student` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `teacher`
---
-ALTER TABLE `teacher`
-  ADD CONSTRAINT `teacher_ibfk_1` FOREIGN KEY (`rfid`) REFERENCES `card` (`rfid`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `teach_ibfk_1` FOREIGN KEY (`teacher`) REFERENCES `person` (`email`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `teach_ibfk_2` FOREIGN KEY (`student`) REFERENCES `person` (`email`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `use`
