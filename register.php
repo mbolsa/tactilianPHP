@@ -1,3 +1,9 @@
+<?php
+
+function escribePagina($error)
+{
+?>
+
 <html>
   <head>
   <title>Register</title>
@@ -23,8 +29,14 @@
             <input type="text" name="nick" id="alias" pattern="^.{1,19}$" title="Entre 1 y 20 letras y/o espacios" class="form-control input-sm chat-input" placeholder="Alias">
             <br>
             <label class="control-label"> Email </label>
-            <input type="email" name="email" id="correo" pattern="^[a-z0-9._%+-]{6,20}@[a-z0-9.-]{1,20}\.[a-z]{2,3}$" class="form-control input-sm chat-input" placeholder="Email" required>
+            <input type="email" name="email" id="correo" pattern="^[a-z0-9._%+-]{1,37}@[a-z0-9.-]{1,20}\.[a-z]{2,3}$" class="form-control input-sm chat-input" placeholder="Email" required>
             <br>
+            <select name="type">
+              <option value="alumno">Alumno</option>
+              <option value="profesor">Profesor</option>
+            </select>
+            <br>
+            <?php if ($error == 1) echo "Email en uso"; ?>
             <input type="submit" class="btn btn-light btn-block" value="Crear usuario!"> 
           </form>
         </div>
@@ -34,3 +46,55 @@
   <br>
   <br>
   <?php require_once("footer.php"); ?>
+
+<?php
+}
+
+function comprobarUser($email)
+{
+	global $conexion;
+	$resultado = $conexion->query("SELECT name FROM person WHERE email = '$email'");
+	if ($resultado->num_rows == 0)
+	{
+		return TRUE;
+	}
+	else
+	{
+		return FALSE;
+	}
+}
+
+function insertarDatos($email, $name, $surname, $nick, $type)
+{
+	global $conexion;
+	$resultado = $conexion->query("INSERT INTO person(email, name, surname, alias, type) VALUES ('$email', '$name', '$surname', '$nick', '$type')");
+	if (mysqli_query($conexion, $resultado)) {
+	    echo "New record created successfully";
+	} else {
+	    echo "Error: " . $resultado . "<br>" . mysqli_error($conexion);
+	}
+	$resultado->close();
+}
+
+require_once("conexion.inc.php");
+$conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
+if (mysqli_connect_errno())
+{
+	echo "Error al establecer la conexión con la base de datos: " . mysqli_connect_error();
+	exit();
+}
+
+$conexion->query("set names utf8");
+
+$email = $_POST["email"];
+$name = $_POST["name"];
+$surname = $_POST["surname"];
+$nick = $_POST["nick"];
+$type = $_POST["type"];
+if (comprobarUser($email)) {
+	insertarDatos($email, $name, $surname, $nick, $type);
+	header ("location:home.php");
+}
+else {
+	escribePagina(1);
+}
