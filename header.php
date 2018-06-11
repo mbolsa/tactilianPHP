@@ -5,11 +5,7 @@
     <meta name="author" content="">
     
     
-<<<<<<< HEAD
 <link href="./css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-=======
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
->>>>>>> 1578ca053676b8d46719654e880a12099e1d8cf3
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 
@@ -21,7 +17,7 @@
       <div class="navbar" role="navigation" style="margin-bottom:0;">
         <div class="col-md-12">
           <img src="/images/tactilian_logo.png" width="40" height="40", alt="Logo Tactilian">
-          <a class="navbar-brand" href="#" style="margin-left:1%"> Tactilian </a>
+          <a class="navbar-brand" href="home.php" style="margin-left:1%"> Tactilian </a>
         </div>
       </div>
     </header>
