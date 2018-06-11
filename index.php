@@ -41,7 +41,7 @@ function escribePagina($error)
 function ComprobarLogin($email, $password)
 {
 	global $conexion;
-	$resultado = $conexion->query("SELECT password FROM person WHERE email = '$email'");
+	$resultado = $conexion->query("SELECT passwd FROM person WHERE email = '$email'");
 	if ($resultado->num_rows == 0)
 	{
 		return FALSE;

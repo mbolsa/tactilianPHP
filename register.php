@@ -1,7 +1,11 @@
 <?php
 
-function escribePagina($error)
+session_start();
+if (!isset($_SESSION["user"]))
 {
+	header("location:index.php");
+}
+
 ?>
 
 <html>
@@ -17,7 +21,7 @@ function escribePagina($error)
     <div class="row justify-content-center">
       <div class="col-md-offset-5 col-md-6">
         <div class="form-group has-feedback">
-          <form method="post" action="">
+          <form method="post" action="register.new.php" id="register">
             <h4 class="display-4"> Registro </h4>
             <label class="control-label"> Nombre </label>
             <input type="text" name="name" id="nombre" pattern="^.{1,19}$" title="Entre 1 y 20 letras y/o espacios" class="form-control input-sm chat-input", placeholder="Nombre" required>
@@ -45,74 +49,38 @@ function escribePagina($error)
   </div>
   <br>
   <br>
+  
+  <script>
+  $('#register').submit(function(event) {  
+  event.preventDefault();  
+  var url = $(this).attr('action');  
+  var datos = $(this).serialize();  
+  $.post(url, datos, function(resultado) {
+		if (resultado == 1)
+		{
+			alert("El usuario se ha añadido correctamente");
+			$('#nombre').val("");
+			$('#apellido').val("");
+			$('#alias').val("");
+			$('#correo').val("");
+		}
+		else if (resultado == 2)
+		{
+			alert("Rellene todos los datos");
+		}
+		else if (resultado == 3)
+		{
+			alert("El email introducido ya está registrado en la Base de Datos");
+		}
+		else
+		{
+			alert("ERROR");
+		}
+	});
+}); 
+
+</script>
   <?php require_once("footer.php"); ?>
 
 <?php
-}
 
-function comprobarUser($email)
-{
-	global $conexion;
-	$resultado = $conexion->query("SELECT name FROM person WHERE email = '$email'");
-	if ($resultado->num_rows == 0)
-	{
-		return TRUE;
-	}
-	else
-	{
-		return FALSE;
-	}
-}
-
-function generateRandomString($length = 10) {
-
-return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $length);
-
-}
-
-function insertarDatos($email, $name, $surname, $nick, $type)
-{
-	global $conexion;
-	$password1 = generateRandomString();
-	$password = md5($password1);
-	$resultado = $conexion->query("INSERT INTO person(email, name, surname, alias, type, passwd) VALUES ('$email', '$name', '$surname', '$nick', '$type', '$password')");
-	if (mysqli_query($conexion, $resultado)) {
-	    echo "New record created successfully";
-	} else {
-	    echo "Error: " . $resultado . "<br>" . mysqli_error($conexion);
-	}
-/*  $para      = $email;
-  $titulo    = 'Credenciales Tactilian';
-  $mensaje   = 'Hola,'. "\n"
-                'Ha sido registrado satisfactoriamente en nuestra aplicación. Sus credenciales son las siguientes:' . "\n\t" .
-                'email: ' . $email . "\n\t" .
-                'contraseña: ' . $password1 . "\n" . 
-                'Un saludo y gracias por registrarse.';
-  $cabeceras = 'From: admin@tactilian.com';
-
-  mail($para, $titulo, $mensaje, $cabeceras);*/
-	$resultado->close();
-}
-
-require_once("conexion.inc.php");
-$conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
-if (mysqli_connect_errno())
-{
-	echo "Error al establecer la conexión con la base de datos: " . mysqli_connect_error();
-	exit();
-}
-
-$conexion->query("set names utf8");
-
-$email = $_POST["email"];
-$name = $_POST["name"];
-$surname = $_POST["surname"];
-$nick = $_POST["nick"];
-$type = $_POST["type"];
-if (comprobarUser($email)) {
-	insertarDatos($email, $name, $surname, $nick, $type);
-	header ("location:home.php");
-}
-else {
-	escribePagina(1);
-}
