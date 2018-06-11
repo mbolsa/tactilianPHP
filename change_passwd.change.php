@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once("conexion.inc.php");
 $conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
 if (mysqli_connect_errno())
@@ -23,10 +23,11 @@ else
   $fila = $resultado->fetch_array();
   $resultado->close();
   $crypt_pw = $fila[0];
-  if ($crypt_pw == md5($passwd)) {
+  if ($crypt_pw == md5($passwd))
+  {
     if ($newPasswd == $newPasswdRepeat) {
-      $passcrypt = md5($newPasswd);
-      $conexion->query("update person set passwd = '$passcrypt' where id = " . $_SESSION["user"]["id"]);
+		$passcrypt = md5($newPasswd);
+		$conexion->query("update person set passwd = '$passcrypt' where id = " . $_SESSION["user"]["id"]);
       echo 1;
     }
     else {
