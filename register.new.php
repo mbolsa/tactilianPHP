@@ -15,7 +15,7 @@ $nick = $_POST["nick"];
 $email = $_POST["email"];
 $type = $_POST["type"];
 
-if (($name == "") OR ($surname == "") OR ($nick == "") OR ($email == ""))
+if (($name == "") OR ($surname == "") OR ($email == ""))
 {
 	echo 2;
 }
