@@ -1,6 +1,15 @@
+<?php
+
+session_start();
+if (!isset($_SESSION["user"]))
+{
+  header("location:index.php");
+}
+
+?>
 <html>
   <head>
-  <title>Monitoring</title>
+  <title>Change Password</title>
   
   
 <?php require_once("header.php"); ?>
@@ -13,7 +22,7 @@
     <div class="row justify-content-center">
       <div class="col-md-offset-5 col-md-6">
         <div class="form-group has-feedback">
-          <form method="post" action="">
+          <form method="post" action="change_passwd.change.php" id="change">
             <h4 class="display-4"> Cambiar contraseña </h4>
             <label class="control-label"> Contraseña actual </label>
             <input type="password" name="current_passwd" class="form-control input-sm chat-input", placeholder="Contraseña actual" required>
@@ -34,4 +43,33 @@
   <br>
   <br>
 
+  <script>
+  $('#change').submit(function(event) {  
+    event.preventDefault();  
+    var url = $(this).attr('action');  
+    var datos = $(this).serialize();  
+    $.post(url, datos, function(resultado) {
+      if (resultado == 1)
+      {
+        alert("Se ha cambiado la contraseña correctamente");
+      }
+      else if (resultado == 2)
+      {
+        alert("Rellene todos los datos");
+      }
+      else if (resultado == 3)
+      {
+        alert("Las contraseñas nuevas no coinciden");
+      }
+      else if (resultado == 4)
+      {
+        alert("La contraseña antigua es incorrecta");
+      }
+      else
+      {
+        alert("ERROR");
+      }
+    });
+  }); 
+  </script>
   <?php require_once("footer.php"); ?>
