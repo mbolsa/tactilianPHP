@@ -72,7 +72,7 @@ $conexion->query("set names utf8");
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-light btn-block"> Ver información </a>
+              <a href="#" class="btn btn-light btn-block" onClick="redirigir();"> Ver información </a>
             </span>
           </div>
         </div>
@@ -83,6 +83,11 @@ $conexion->query("set names utf8");
   <br></br>
   <br></br>
   <script>
+  function redirigir()
+  {
+	  var val = $("#chooser").val();
+	  window.location.replace("student.php?id=" + val);
+  }
   function desasociar() {  
   var url = "students.delete.php";  
   var val = $("#chooser").val();
