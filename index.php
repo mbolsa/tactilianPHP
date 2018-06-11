@@ -41,7 +41,7 @@ function escribePagina($error)
 function ComprobarLogin($email, $password)
 {
 	global $conexion;
-	$resultado = $conexion->query("SELECT password FROM users WHERE email = '$email'");
+	$resultado = $conexion->query("SELECT password FROM person WHERE email = '$email'");
 	if ($resultado->num_rows == 0)
 	{
 		return FALSE;
@@ -58,7 +58,7 @@ function ComprobarLogin($email, $password)
 function cargarDatosSesion($email)
 {
 	global $conexion;
-	$resultado = $conexion->query("SELECT id, name, surname FROM users WHERE email = '$email'");
+	$resultado = $conexion->query("SELECT id, name, surname, type FROM person WHERE email = '$email'");
 	$fila = $resultado->fetch_assoc();
 	session_start();
 	$_SESSION["user"] = $fila;
