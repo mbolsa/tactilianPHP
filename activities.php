@@ -55,7 +55,7 @@ $conexion->query("set names utf8");
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-light btn-block"> Iniciar </a>
+              <a href="#" class="btn btn-light btn-block" onClick="redirigir();"> Elegir alumno </a>
             </span>
           </div>
         </div>
@@ -84,6 +84,14 @@ $conexion->query("set names utf8");
   </div>
   <br>
   <br>
+
+  <script>
+  function redirigir()
+  {
+    var val = $("#chooser").val();
+    window.location.replace("associate_activity.php?id=" + val);
+  }
+</script>
  
 
 <?php require_once("footer.php"); ?>
