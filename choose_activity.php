@@ -29,7 +29,7 @@ $conexion->query("set names utf8");
         <div class="form-group">
           <h2> Seleccione Actividad </h2>
 		  <?php
-		  
+		  $id = $_GET['id'];
 		  $activities = $conexion->query("select id, name from genericActivity;");
 		  if ($activities->num_rows == 0)
 		  {
@@ -37,7 +37,9 @@ $conexion->query("set names utf8");
 		  }
 		  else
 		  {
-			  echo "<select class='form-control' size='10'>";
+        ?>
+			  <select class="form-control" size="10"  id="chooser">
+        <?php
 			  while ($activity = $activities->fetch_array())
 			  {
 				  echo "<option value='" . $activity[0] . "'>$activity[1]</option>";
@@ -57,7 +59,7 @@ $conexion->query("set names utf8");
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
-              <a href="/chooseStu" class="btn btn-light btn-block"> Iniciar </a>
+              <a href="#" id="choose_activity" class="btn btn-light btn-block" onClick="guardar();"> Iniciar </a>
             </span>
           </div>
         </div>
@@ -67,6 +69,27 @@ $conexion->query("set names utf8");
   </div>
   <br>
   <br>
+  <script>
+  function guardar() {  
+    alert("hola");
+  var url = "choose_activity.save.php";  
+  var id = <?php echo $id; ?>;
+  var val = $("#chooser").val();
+  var datos = {student: id, activity: val};
+  alert(val);
+  $.post(url, datos, function(resultado) {
+    
+    if (resultado != 0)
+    {
+      window.location.replace("activity_student.php?activity=" + resultado);
+    }
+    else
+    {
+      alert("ERROR");
+    }
+  });
+}
+</script>
  
 
 <?php require_once("footer.php"); ?>
