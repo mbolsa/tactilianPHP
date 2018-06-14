@@ -31,7 +31,7 @@
             <br>
             <br>
             <span class="group-btn btn-group-justified ">
-              <a href="/monitoring" class="btn btn-light btn-block"> Seguimiento </a>
+              <a href="/monitoring.php?student=<?php echo $_GET["id"]; ?>" class="btn btn-light btn-block"> Seguimiento </a>
             </span>
             <br>
             <br>

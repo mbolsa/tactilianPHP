@@ -1,3 +1,17 @@
+<?php
+
+session_start();
+require_once("conexion.inc.php");
+$conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
+if (mysqli_connect_errno())
+{
+  echo "Error al establecer la conexión con la base de datos: " . mysqli_connect_error();
+  exit();
+}
+
+$conexion->query("set names utf8");
+
+?>
 <html>
   <head>
   <title>Monitoring</title>
@@ -14,26 +28,24 @@
       <div class="col-md-5">
         <div class="form-group">
           <h2> Actividades asignadas </h2>
-          <select multiple class="form-control" size="10">
-            <option> Actividad 1 </option>
-            <option> Actividad 2 </option>
-            <option> Actividad 3 </option>
-            <option> Actividad 4 </option>
-            <option> Actividad 5 </option>
-            <option> Actividad 6 </option>
-            <option> Actividad 7 </option>
-            <option> Actividad 8 </option>
-            <option> Actividad 9 </option>
-            <option> Actividad 10 </option>
-            <option> Actividad 11 </option>
-            <option> Actividad 12 </option>
-            <option> Actividad 13 </option>
-            <option> Actividad 14 </option>
-            <option> Actividad 15 </option>
-            <option> Actividad 16 </option>
-            <option> Actividad 17 </option>
-            <option> Actividad 18 </option>
-          </select>
+          <?php
+          $activities = $conexion->query("select a.genericActivity, g.name FROM activity a INNER JOIN genericActivity g ON a.genericActivity = g.id WHERE a.student = " . $_GET['student']);
+          if ($activities->num_rows == 0)
+          {
+            echo "<p><b>No hay actividades asociadas al alumno</b></p>";
+          }
+          else
+          {
+            ?>
+          <select class="form-control" size="10" id="chooser">
+            <?php
+            while ($activity = $activities->fetch_array())
+            {
+              echo "<option value='" . $activity[0] . "'>$activity[1] </option>";
+            }
+            echo "</select>";
+          }
+            ?>
           <br>
           <div class="wrapper"></div>
           <div class="text-center">
@@ -51,7 +63,7 @@
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-light btn-block"> Asignar actividad </a>
+              <a href="/choose_activity.php?student=<?php echo $_GET["student"]; ?>" class="btn btn-light btn-block"> Asignar actividad nueva</a>
             </span>
           </div>
         </div>
