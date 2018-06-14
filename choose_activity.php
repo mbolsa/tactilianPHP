@@ -29,7 +29,7 @@ $conexion->query("set names utf8");
         <div class="form-group">
           <h2> Seleccione Actividad </h2>
 		  <?php
-		  $id = $_GET['id'];
+		  $id = $_GET['student'];
 		  $activities = $conexion->query("select id, name from genericActivity;");
 		  if ($activities->num_rows == 0)
 		  {
@@ -71,12 +71,10 @@ $conexion->query("set names utf8");
   <br>
   <script>
   function guardar() {  
-    alert("hola");
   var url = "choose_activity.save.php";  
   var id = <?php echo $id; ?>;
   var val = $("#chooser").val();
   var datos = {student: id, activity: val};
-  alert(val);
   $.post(url, datos, function(resultado) {
     
     if (resultado != 0)
