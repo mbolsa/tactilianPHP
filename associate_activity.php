@@ -29,6 +29,7 @@ $conexion->query("set names utf8");
         <div class="form-group">
           <h2> Seleccione Alumno </h2>
       <?php
+      $id = $_GET['id'];
       $students = $conexion->query("select t.student, p.name, p.surname FROM teach t INNER JOIN person p ON t.student = p.id WHERE t.teacher = " . $_SESSION["user"]["id"]);
       if ($students->num_rows == 0)
       {
@@ -67,9 +68,7 @@ $conexion->query("set names utf8");
   <script>
   function guardar() {  
   var url = "associate_activity.save.php";  
-  var url =  window.location.pathname;
-  var id = url.substring(url.lastIndexOf('?') + 1);
-  alert(url); // 234234234
+  var id = <?php echo $id; ?>;
   var val = $("#chooser").val();
   var datos = {student: val, activity: id};
 
