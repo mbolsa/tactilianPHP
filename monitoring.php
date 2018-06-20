@@ -27,9 +27,9 @@ $conexion->query("set names utf8");
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="form-group">
-          <h2> Actividades asignadas </h2>
+          <h2> Actividades realizadas </h2>
           <?php
-          $activities = $conexion->query("select a.genericActivity, g.name FROM activity a INNER JOIN genericActivity g ON a.genericActivity = g.id WHERE a.student = " . $_GET['student']);
+          $activities = $conexion->query("select a.genericActivity, g.name, a.id FROM activity a INNER JOIN genericActivity g ON a.genericActivity = g.id WHERE a.student = " . $_GET['student']);
           if ($activities->num_rows == 0)
           {
             echo "<p><b>No hay actividades asociadas al alumno</b></p>";
@@ -41,18 +41,12 @@ $conexion->query("set names utf8");
             <?php
             while ($activity = $activities->fetch_array())
             {
-              echo "<option value='" . $activity[0] . "'>$activity[1] </option>";
+              echo "<option value='" . $activity[2] . "'>$activity[2] - $activity[1] </option>";
             }
             echo "</select>";
           }
             ?>
           <br>
-          <div class="wrapper"></div>
-          <div class="text-center">
-            <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-outline-light btn-block"> Borrar </a>
-            </span>
-          </div>
         </div>
       </div>
       <div class="col-md-4 offset-md-2">
@@ -63,13 +57,20 @@ $conexion->query("set names utf8");
         <div class="wrapper">
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
-              <a href="/choose_activity.php?student=<?php echo $_GET["student"]; ?>" class="btn btn-light btn-block"> Asignar actividad nueva</a>
+              <a href="#" class="btn btn-light btn-block" onClick="ir();"> Ver información</a>
             </span>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <script>
+  function ir()
+  {
+  var val = $("#chooser").val();
+  window.location.replace("details.php?id="+val);
+  }
+  </script>
   <br>
   <br>
   <br>

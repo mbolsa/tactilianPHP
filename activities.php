@@ -61,21 +61,10 @@ $conexion->query("set names utf8");
         </div>
         <br>
         <div class="wrapper">
-          <div class="text-center">
-            <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-light btn-block"> Borrar </a>
-            </span>
-          </div>
           <br>
           <div class="text-center">
             <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-light btn-block"> Editar </a>
-            </span>
-          </div>
-          <br>
-          <div class="text-center">
-            <span class="group-btn btn-group-justified ">
-              <a href="#" class="btn btn-light btn-block"> Crear </a>
+              <a href="/new_activity.php" class="btn btn-light btn-block"> Crear </a>
             </span>
           </div>
         </div>
@@ -91,6 +80,7 @@ $conexion->query("set names utf8");
     var val = $("#chooser").val();
     window.location.replace("associate_activity.php?id=" + val);
   }
+
 </script>
  
 

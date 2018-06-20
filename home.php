@@ -27,6 +27,13 @@ if (!isset($_SESSION["user"]))
         <h1><a href="activities.php">Lista de actividades</a></h1>
       </div>
     </div>
+    <div class="row justify-content-center">
+      <div class="col-md-offset-2 col-md-3">
+        <h1><a href="pictograms.php">Lista de pictogramas</a></h1>
+      </div>
+      <div class="col-md-offset-2 col-md-3">
+      </div>
+    </div>
   </div>
 
   <br>
