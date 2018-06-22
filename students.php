@@ -86,7 +86,13 @@ $conexion->query("set names utf8");
   function redirigir()
   {
 	  var val = $("#chooser").val();
+	  if (val != null)
+	  {
 	  window.location.replace("student.php?id=" + val);
+	  }
+	  else{
+		  alert("Seleccione un alumno");
+	  }
   }
   function desasociar() {  
   var url = "students.delete.php";  

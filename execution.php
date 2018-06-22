@@ -32,12 +32,12 @@ $conexion->query("set names utf8");
           echo "<h2> Ejecución de actividad <b>$infor[1]</b> para el alumno <b>$infor[0] $infor[2]</b></h2>";
 
 ?>          
-      <div class="col-md-5">
+      <div class="col-md-8">
         <div class="form-group text-center">
           <br>
           <br>
           <span class="group-btn btn-group-justified">
-            <a href="#" class="btn btn-light btn-block"> Iniciar </a>
+            <a href="#" class="btn btn-light btn-block" onClick="empezar();"> Iniciar </a>
           </span>
           <br>
           <br>
@@ -47,26 +47,32 @@ $conexion->query("set names utf8");
           <div class="form-group text-center">
             <h4> Comentarios </h4>
           </div>
-          <textarea class="form-control" placeholder="escriba comentarios aquí" name="description", rows = "5"></textarea>
-        </div>
-      </div>
-      <div class="offset-md-2 col-md-5">
-        <br>
-        <br>
-        <br>
-        <div class="form-group text-center">
-          <h4> Información </h4>
-        </div>
-        <div class="form-control">
-          <p> Hora de Inicio:       00:00 </p>
-          <p> Hora de Fin:          00:00 </p>
-          <p> Alumno:               ----- </p>
-          <p> Profesor:             ----- </p>
-          <p> Respuesta:            ----- </p>
+          <textarea class="form-control" placeholder="escriba comentarios aquí" id="comentary" name="description", rows = "5"></textarea>
         </div>
       </div>
     </div>
   </div>
+
+  
+    <script>
+  function empezar() {  
+  var url = "execution.start.php";  
+  var id = <?php echo $_GET["activity"]; ?>;
+  var comentary = $("#comentary").val();
+  var datos = {activity: id, com:comentary};
+  $.post(url, datos, function(resultado) {
+    
+    if (resultado != 0)
+    {
+      window.location.replace("executionQuestion.php?activity=" + id);
+    }
+    else
+    {
+      alert("ERROR");
+    }
+  });
+}
+</script>
 
 <?php require_once("footer.php"); ?>          
 
