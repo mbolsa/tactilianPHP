@@ -19,14 +19,13 @@ else
 		$ext = pathinfo(basename($_FILES['pic']['name']), PATHINFO_EXTENSION);
 		$ext = strtolower($ext);
 		$uploaddir = 'pictograms/';
-		$ext = pathinfo(basename($_FILES['pic']['name']), PATHINFO_EXTENSION);
-		echo $ext;
 		$sql = "insert into pictogram (name, ext) values ('" . $name . "', '" . $ext . "')";
-		//$conexion->query($sql);
-		/*$uploadfile = $uploaddir . $Id . "." . $ext;
+		$conexion->query($sql);
+		$Id = $conexion->insert_id;
+		$uploadfile = $uploaddir . $Id . "." . $ext;
 		move_uploaded_file($_FILES['pic']['tmp_name'], $uploadfile);
 
 
 		// Mandar email
-		/*echo 1;*/
+		header("location:/pictograms.php");
 }

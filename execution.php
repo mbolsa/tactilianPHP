@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+require_once("conexion.inc.php");
+$conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
+if (mysqli_connect_errno())
+{
+  echo "Error al establecer la conexión con la base de datos: " . mysqli_connect_error();
+  exit();
+}
+
+$conexion->query("set names utf8");
+
+?>
+<html>
 <html>
   <head>
   <title>Student</title>
@@ -11,9 +26,14 @@
   <br>
   <div class="container">
     <div class="row justify-content-center">
+          <?php
+            $information = $conexion->query("select p.name, g.name, p.surname FROM activity a, genericActivity g, person p WHERE a.genericActivity = g.id and a.student = p.id and a.id = " . $_GET['activity']);
+            $infor = $information->fetch_array();
+          echo "<h2> Ejecución de actividad <b>$infor[1]</b> para el alumno <b>$infor[0] $infor[2]</b></h2>";
+
+?>          
       <div class="col-md-5">
         <div class="form-group text-center">
-          <h2> EJECUCIÓN </h2>
           <br>
           <br>
           <span class="group-btn btn-group-justified">
@@ -21,9 +41,6 @@
           </span>
           <br>
           <br>
-          <span class="group-btn btn-group-justified">
-            <a href="#" class="btn btn-light btn-block"> Terminar </a>
-          </span>
           <br>
           <br>
           <br>

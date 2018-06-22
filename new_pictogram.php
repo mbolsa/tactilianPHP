@@ -27,9 +27,10 @@ if (!isset($_SESSION["user"]))
             <input type="text" name="name" id="name" class="form-control input-sm chat-input", placeholder="Nombre" required>
             <br>
 			<label for="customFile">Choose file</label>   
-			<input type="file" id="customFile" name="pic">
+			<input type="file" id="customFile" name="pic" required>
             <input type="submit" class="btn btn-light btn-block" value="Crear pictograma!" id="enviaboton"> 
 		  </form>
+
         </div>
       </div>
     </div>
@@ -38,27 +39,31 @@ if (!isset($_SESSION["user"]))
   <br>
   
   <script>
-  
-  $('#enviaboton').click(function() {
-  $('#new_pictogram').submit();
+  /*
+$('#enviaboton').click(function() {
+$.ajax({
+        // Your server script to process the upload
+        url: 'new_pictogram.new.php',
+        type: 'POST',
+
+        // Form data
+        data: new FormData($('form')[0]),
+
+        // Tell jQuery not to process data or worry about content-type
+        // You *must* include these options!
+        cache: false,
+        contentType: false,
+        processData: false,
+
+        // Custom XMLHttpRequest
+        xhr: function() {
+            var myXhr = $.ajaxSettings.xhr();
+            return myXhr;
+        }
+    });
 });
 
-var options = {
-	success: function(responseText, statusText, xhr, $form) {
-		if (responseText == 1)
-		{
-			alert("Pictograma añadido correctamente");
-			window.location.replace("/pictograms.php");
-		}
-		else
-		{
-			alert("ERROR");
-		}
-	}
-	
-}
-$('#new_pictogram').ajaxForm(options);
-
+*/
   
   
   

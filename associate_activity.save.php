@@ -11,5 +11,5 @@ $conexion->query("set names utf8");
 
 $student = $_POST["student"];
 $activity = $_POST["activity"];
-$conexion->query("insert into activity (genericActivity, student) values ($activity, $student)");
+$conexion->query("insert into activity (genericActivity, student, teacher) values ($activity, $student, " . $_SESSION["user"]["id"] . ")");
 echo $conexion->insert_id;

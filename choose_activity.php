@@ -79,7 +79,7 @@ $conexion->query("set names utf8");
     
     if (resultado != 0)
     {
-      window.location.replace("activity_student.php?activity=" + resultado);
+      window.location.replace("execution.php?activity=" + resultado);
     }
     else
     {
