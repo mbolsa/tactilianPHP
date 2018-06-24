@@ -31,7 +31,7 @@ $conexion->query("set names utf8");
   <div class="container">
     <div class="row justify-content-center">
           <?php
-            $information = $conexion->query("select p.name, g.name, p.surname, g.id FROM activity a, genericActivity g, person p WHERE a.genericActivity = g.id and a.student = p.id and a.id = " . $_GET['activity']);
+            $information = $conexion->query("select p.name, g.name, p.surname, g.id, g.type FROM activity a, genericActivity g, person p WHERE a.genericActivity = g.id and a.student = p.id and a.id = " . $_GET['activity']);
             $infor = $information->fetch_array();
           echo "<h2>Ejecución de actividad <b>$infor[1]</b> para el alumno <b>$infor[0] $infor[2]</b></h2>";
 
@@ -57,6 +57,7 @@ $conexion->query("set names utf8");
 		  
 		  $pictograms = $conexion->query("select p.id, p.ext from pictogram p inner join pictogramsQuestion pq on pq.pictogram = p.id where pq.question = $question[0]");
 		  echo "<p>";
+		  $num = $pictograms->num_rows;
 		  while ($pictogram = $pictograms->fetch_array())
 		  {
 				echo "<img src='/pictograms/" . $pictogram[0] . "." . $pictogram[1] . "' width='150' />";
@@ -66,11 +67,33 @@ $conexion->query("set names utf8");
 		  </p>
 		  <?php
 		  }
+		  if ($infor[4] == 0)
+		  {
 		  ?>
+		  <p><b>Tu respuesta:</b></p>
+		  <div id="respuestaOrder">
+		  <?php
+		  for ($i=0;$i<$num;$i++)
+		  {
+			  echo "<input type='hidden' id='oculto" . $i . "' />";
+		  }
+		  
+		  ?>
+		  
+		  </div>
+		  <?php
+		  }
+		  else
+		  {
+			  ?>
+		  
           <br>
           <br>
           <br>
 		  <input type="hidden" id="oculto" />
+			  <?php
+		  }
+		  ?>
         </div>
       </div>
     </div>
@@ -78,6 +101,11 @@ $conexion->query("set names utf8");
 
   
     <script>
+	<?php
+	
+	if ($infor[4] == 1)
+	{
+		?>
 $(document).keypress(function(e) {
 	
     if(e.which == 13) {
@@ -107,7 +135,74 @@ $(document).keypress(function(e) {
 	{
 		$("#oculto").val($("#oculto").val() + String.fromCharCode(e.which));
 	}
-});</script>
+});
+
+<?php
+
+	}
+	else
+	{
+		?>
+	  var ord = 0;
+$(document).keypress(function(e) {
+	
+    if(e.which == 13) {
+	  var url = "executionQuestion.saveOrder.php";  
+	  var id = <?php echo $question[0]; ?>;
+	  var activity = <?php echo $_GET['activity']; ?>;
+	  var rfid = $("#oculto" + ord).val();
+	  ord++;
+	  var datos = {question: id, rfid:rfid, activity:activity, ord:ord};
+	  $.post(url, datos, function(resultado) {
+		if (resultado == 3)
+		{
+		  alert("La tarjeta RFID no está asignada");
+		  ord = ord -1;
+		  $("#oculto" + ord).val('');
+		}
+		else
+		{
+			$("#respuestaOrder").append("<img src='/pictograms/" + resultado + "' width='150' />");
+			$("#oculto" + ord).val('');
+			if (ord == <?php echo $num; ?>)
+			{
+			  var url = "executionQuestion.check.php";  
+			  var id = <?php echo $question[0]; ?>;
+			  var activity = <?php echo $_GET['activity']; ?>;
+			  var datos = {question: id, rfid:rfid, activity:activity, ord:ord};
+			  $.post(url, datos, function(resultado) {
+				  if (resultado == 1)
+				  {
+					  alert("Respuesta correcta");
+					  window.location.replace("executionQuestion.php?activity=" + <?php echo $_GET['activity']; ?>);
+				  }
+				  else
+				  {
+					  alert("respuesta incorrecta");
+					  window.location.replace("executionQuestion.php?activity=" + <?php echo $_GET['activity']; ?>);
+					  
+				  }					  
+				  
+				  
+				  
+			  });
+			}
+		}
+	  });
+    }
+	else
+	{
+		$("#oculto" + ord).val($("#oculto" + ord).val() + String.fromCharCode(e.which));
+	}
+});
+
+		
+		
+		
+		<?php
+	}
+?>
+</script>
 
 <?php require_once("footer.php"); ?>          
 

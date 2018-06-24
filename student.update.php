@@ -25,6 +25,6 @@ if (($name == "") OR ($surname == ""))
 }
 else
 {
-  $conexion->query("update person set name = $name, surname = $surname, alias = $nick where id = $id");
+  $conexion->query("update person set name = '" . $name . "' , surname = '" . $surname . "', alias = '" . $nick . "' where id = $id");
   echo 1;
 }

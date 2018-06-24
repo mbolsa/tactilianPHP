@@ -45,7 +45,7 @@ $conexion->query("set names utf8");
             $t = $type->fetch_array();
           	?>
           	<h2> Información del estudiante </h2>
-            <input type="hidden" id="pid" name="personid" value="<?php echo $info[0] ?>">
+            <input type="hidden" id="pid" name="personid" value="<?php echo $id; ?>">
             <label class="control-label"> Nombre </label>
             <input type="text" name="name" id="nombre" pattern="^.{1,19}$" title="Entre 1 y 20 letras y/o espacios" class="form-control input-sm chat-input", placeholder="Nombre" value="<?php echo $info[0] ?>">
             <br>
@@ -53,14 +53,14 @@ $conexion->query("set names utf8");
             <input type="text" name="surname" id="apellido" pattern="^.{1,19}$" title="Entre 1 y 20 letras y/o espacios" class="form-control input-sm chat-input", placeholder="Apellidos" value="<?php echo $info[1] ?>">
             <br>
             <label class="control-label"> Alias </label>
-            <input type="text" name="nick" id="alias" pattern="^.{1,19}$" title="Entre 1 y 20 letras y/o espacios"  class="form-control input-sm chat-input" placeholder="Alias" value="<?php echo $info[2] ?>">
+            <input type="text" name="nick" id="alias" pattern="^.{0,20}$" title="Entre 0 y 20 letras y/o espacios"  class="form-control input-sm chat-input" placeholder="Alias" value="<?php echo $info[2] ?>">
             <br>
             <?php
             if ($t[0] == 3) {
             ?>
-            <input type="submit" class="btn btn-light btn-block" name="actualizar" id="update" value="Actualizar"> 
+            <input type="button" class="btn btn-light btn-block" name="actualizar" id="update" value="Actualizar" onClick="actualiza();"> 
             <br>
-            <input type="submit" class="btn btn-outline-light btn-block" name="borrar" id="delete" value="Borrar"> 
+            <input type="button" class="btn btn-outline-light btn-block" name="borrar" id="delete" value="Borrar" onClick="borrar();"> 
             <?php } ?>
           </form>
       	</div>
@@ -88,17 +88,14 @@ $conexion->query("set names utf8");
   </div>
 
 <script>
-  $(function(){
-    $('#form input').click(function(event){
-      event.preventDefault(); 
-      if ($(this).attr("value") == "Actualizar") {
-        var url = "student.update.php"; 
-        var datos = $(this).serialize();   
+function actualiza()
+{        var url = "student.update.php"; 
+        var datos = $("#form").serialize();   
         $.post(url, datos, function(resultado) {
           if (resultado == 1)
           {
             alert("Información actualizada");
-            window.location.replace("student.php");
+            window.location.replace("student.php?id=" + <?php echo $id; ?>);
           }
           else if (resultado == 2)
           {
@@ -111,8 +108,9 @@ $conexion->query("set names utf8");
         });
       }
       
-      if ($(this).attr("value") == "Borrar") {
-        var url = "student.delete.php"; 
+function borrar()
+{
+	var url = "student.delete.php"; 
         var datos = $(this).serialize();   
         $.post(url, datos, function(resultado) {
           if (resultado == 1)
@@ -125,10 +123,7 @@ $conexion->query("set names utf8");
             alert("ERROR");
           }
         });
-      }
-    })
-    
-  })
+  }
  </script>
 
 <?php require_once("footer.php"); ?>
