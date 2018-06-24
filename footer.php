@@ -3,6 +3,7 @@
       <div class="footer-copyright py-3 text-center">
         <div class="container-fluid"> © 2018 Copyright: 
           <a class="navbar-brand" href="#"> Tactilian </a>
+          <a class="navbar-brand" href="logout.php">Cerrar sesión</a>
         </div>
       </div>
     </footer>
