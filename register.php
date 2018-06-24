@@ -6,6 +6,16 @@ if (!isset($_SESSION["user"]))
 	header("location:index.php");
 }
 
+require_once("conexion.inc.php");
+$conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
+if (mysqli_connect_errno())
+{
+  echo "Error al establecer la conexión con la base de datos: " . mysqli_connect_error();
+  exit();
+}
+
+$conexion->query("set names utf8");
+
 ?>
 
 <html>
@@ -20,6 +30,16 @@ if (!isset($_SESSION["user"]))
   <div class="container main-container">
     <div class="row justify-content-center">
       <div class="col-md-offset-5 col-md-6">
+        <?php
+        $type = $conexion->query("select type FROM person WHERE id = " . $_SESSION["user"]["id"]);
+        $t = $type->fetch_array();
+        if ($t[0] != 3) {
+        ?>
+          <h6>No tienes permisos de administrdor</h6>
+        <?php
+        }
+        else {
+        ?>
         <div class="form-group has-feedback">
           <form method="post" action="register.new.php" id="register">
             <h4 class="display-4"> Registro </h4>
@@ -44,6 +64,9 @@ if (!isset($_SESSION["user"]))
             <input type="submit" class="btn btn-light btn-block" value="Crear usuario!"> 
           </form>
         </div>
+        <?php
+        }
+        ?>
       </div>
     </div>
   </div>

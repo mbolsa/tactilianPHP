@@ -27,6 +27,8 @@ function escribePagina($error)
                 <input type="text" id="inputEmail" name="email" class="login_box" placeholder="Usuario" required autofocus>
                 <p class="input_title">Password</p>
                 <input type="password" id="inputPassword" name="password" class="login_box" placeholder="******" required>
+                <a href="recover_account.php">¿Has olvidado la contraseña?</a>
+                <br>
 				<?php if ($error == 1) echo "Datos de acceso incorrectos"; ?>
                 <button class="btn btn-lg btn-primary" type="submit" name="botEnviar">Login</button>
             </form><!-- /form -->
