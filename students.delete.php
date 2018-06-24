@@ -1,5 +1,10 @@
 <?php
 session_start();
+if (!isset($_SESSION["user"]))
+{
+  header("location:index.php");
+}
+
 require_once("conexion.inc.php");
 $conexion = new mysqli($servidor, $usuario, $passwd, $basedatos);
 if (mysqli_connect_errno())
