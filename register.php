@@ -105,5 +105,3 @@ $conexion->query("set names utf8");
 </script>
   <?php require_once("footer.php"); ?>
 
-<?php
-
