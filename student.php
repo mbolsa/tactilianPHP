@@ -91,7 +91,6 @@ $conexion->query("set names utf8");
   $(function(){
     $('#form input').click(function(event){
       event.preventDefault(); 
-      alert("1");
       if ($(this).attr("value") == "Actualizar") {
         var url = "student.update.php"; 
         var datos = $(this).serialize();   
@@ -130,6 +129,6 @@ $conexion->query("set names utf8");
     })
     
   })
-  
+ </script>
 
 <?php require_once("footer.php"); ?>
