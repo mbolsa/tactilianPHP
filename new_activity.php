@@ -34,7 +34,7 @@ if (!isset($_SESSION["user"]))
             <label class="control-label"> Descripción </label>
             <input type="text" name="description" id="description"class="form-control input-sm chat-input" placeholder="Descripción" required>
             <br>
-            <select name="type">
+            <select class="form-control" name="type">
               <option value="0">Ordenar pictogramas</option>
               <option value="1">Elegir opción correcta</option>
             </select>

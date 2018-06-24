@@ -55,7 +55,7 @@ $conexion->query("set names utf8");
             <label class="control-label"> Email </label>
             <input type="email" name="email" id="correo" pattern="^[a-z0-9._%+-]{1,37}@[a-z0-9.-]{1,20}\.[a-z]{2,3}$" class="form-control input-sm chat-input" placeholder="Email" required>
             <br>
-            <select name="type">
+            <select class="form-control" name="type">
               <option value="1">Alumno</option>
               <option value="2">Profesor</option>
             </select>
