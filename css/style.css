@@ -1,0 +1,18 @@
+.boton-atras,.boton-adelante {
+    position: absolute;
+    font-weight: bold;
+    color: #fff;
+    font-size: 160%;
+    width: 45px;
+    text-align: center;
+    z-index: 9999;
+    cursor: pointer;
+}
+.boton-atras {
+    top:7px;
+    right:40px;
+}
+.boton-adelante {
+    top:7px;
+    right:14px;
+}
