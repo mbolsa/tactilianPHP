@@ -42,15 +42,17 @@ $conexion->query("set names utf8");
         <div style="height:300px;overflow:auto;border:1px solid black;">
 		<?php
 		
-		$pictograms = $conexion->query("select id, ext, name from pictogram");
+		$pictograms = $conexion->query("select p.id, p.ext, p.name from pictogram p, assign a where a.pictogram = p.id");
 		if ($pictograms->num_rows ==0)
 		{
-			echo "<p><b>No hay pictogramas</b></p>";
+			echo "<p><b>No hay pictogramas asignados</b></p>";
 		}
 		else
 		{
 			while ($pic = $pictograms->fetch_array())
 			{
+        
+  
 				echo "<figure class='figure' style='background-color:#ffffff;'><img src='pictograms/" . $pic[0] . "." . $pic[1] . "' class='figure-img img-fluid rounded' width='200' height='200'><figcaption class='figure-caption text-center' style='background-color:#ffffff; color:#0A5794'>" . $pic[2] . "</figcaption></figure>";
 			}
 		}

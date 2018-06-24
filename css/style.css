@@ -16,3 +16,6 @@
     top:7px;
     right:14px;
 }
+.figure:hover {
+  opacity: 0.3;
+}

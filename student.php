@@ -76,7 +76,7 @@ $conexion->query("set names utf8");
           </span>
           <br>
           <span class="group-btn btn-group-justified ">
-            <a href="#" class="btn btn-light btn-block"> Catálogo </a>
+            <a href="/pictograms_student.php?student=<?php echo $_GET["id"]; ?>" class="btn btn-light btn-block"> Catálogo </a>
           </span>
           <br>
           <span class="group-btn btn-group-justified ">
