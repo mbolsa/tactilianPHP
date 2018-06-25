@@ -57,7 +57,7 @@ if (!isset($_SESSION["user"]))
 		if (resultado != 0)
 		{
 			alert("La actividad se ha añadido correctamente");
-			window.location.replace("/add_question.php?id="+resultado);
+			window.location.replace("/new_question.php?id="+resultado);
 		}
 		else
 		{

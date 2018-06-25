@@ -36,6 +36,7 @@ if ($error)
 }
 else
 {
-	$conexion->query("update answers set correct = 1 where id = $ans[0]");
+	$conexion->query("update answers set correct = 1  where id = $ans[0]");
+	$conexion->query("update activity set endTime = NOW(),  where id = $activity");
 	echo 1;
 }

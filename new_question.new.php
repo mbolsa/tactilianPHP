@@ -14,16 +14,15 @@ if (mysqli_connect_errno())
 }
 $conexion->query("set names utf8");
 
-$name = $_POST["name"];
 $description = $_POST["description"];
-$type = $_POST["type"];
-if (($name == "") OR ($description == "") OR ($type == ""))
+$activity = $_POST["activity"];
+if ($description == "")
 {
 	echo 0;
 }
 else
 {
-		$conexion->query("insert into genericActivity (name, type, description, autor) values ('$name', $type, '$description', " . $_SESSION["user"]["id"] . ")");
+		$conexion->query("insert into questions (description, activity) values ('$description', $activity)");
 
 		echo $conexion->insert_id;
 }

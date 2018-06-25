@@ -154,6 +154,7 @@ $(document).keypress(function(e) {
 	  ord++;
 	  var datos = {question: id, rfid:rfid, activity:activity, ord:ord};
 	  $.post(url, datos, function(resultado) {
+		  alert(resultado);
 		if (resultado == 3)
 		{
 		  alert("La tarjeta RFID no está asignada");

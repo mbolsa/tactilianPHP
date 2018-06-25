@@ -100,10 +100,10 @@ while ($question = $questions->fetch_array())
 	else 
 	{
 		$i = 1;
-		$answers = $conexion->query("select a.id, a.pictogram, a.correct, a.date, p.ext from answers a inner join pictogram p on p.id = a.pictogram where a.question = $question[0] and a.activity = $infor[7]");	
+		$answers = $conexion->query("select id, correct, date from answers where question = $question[0] and activity = $infor[7]");	
 		while ($answer = $answers->fetch_array())
 		{
-			echo "<p>Intento $i - " . date_format(date_create($answer[3]), "d/m/Y H:i") . ". Orden:</p>";
+			echo "<p>Intento $i - " . date_format(date_create($answer[2]), "d/m/Y H:i") . ". Orden:</p>";
 			$orders = $conexion->query("select a.pictogram, p.ext from answersOrder a inner join pictogram p on a.pictogram = p.id where a.answer = $answer[0] order by a.ord asc");
 			echo "<p>";
 			while ($order = $orders->fetch_array())
@@ -112,7 +112,7 @@ while ($question = $questions->fetch_array())
 				
 			}
 			echo "</p>";
-			if ($answer[2] == 1)
+			if ($answer[1] == 1)
 			{
 				echo "<b>Respuesta correcta</b>";
 			}
