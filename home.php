@@ -52,6 +52,7 @@ $conexion->query("set names utf8");
         <h1><a href="pictograms.php">Lista de pictogramas</a></h1>
       </div>
       <div class="col-md-offset-2 col-md-3">
+        <h1><a href="rfid.php">Asociar tarjeta RFID</a></h1>
       </div>
     </div>
   </div>
